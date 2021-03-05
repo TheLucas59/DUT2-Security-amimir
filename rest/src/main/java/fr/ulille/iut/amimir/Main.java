@@ -62,6 +62,5 @@ public class Main {
         System.in.read();
         System.out.println("Gracefully shutting down...");
         server.shutdown();
-        System.out.println("Gracefully shutting down...");
     }
 }

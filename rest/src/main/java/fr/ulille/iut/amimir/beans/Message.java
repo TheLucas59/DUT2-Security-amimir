@@ -2,6 +2,7 @@ package fr.ulille.iut.amimir.beans;
 
 import java.util.UUID;
 
+import fr.ulille.iut.amimir.dto.CreateMessageDto;
 import fr.ulille.iut.amimir.dto.MessageDto;
 
 public class Message {
@@ -66,5 +67,20 @@ public class Message {
 	
 	public String toString() {
 		return content;
+	}
+
+	public static Message fromCreateDto(CreateMessageDto dto) throws IllegalArgumentException{
+		Message m = new Message();
+		// check if author and dest are correct UUIDs by making UUID try to parse them : if it throws, exception is sent upwards
+		try {
+			UUID.fromString(dto.getAuthor().toString());
+			UUID.fromString(dto.getDest().toString());
+		} catch (IllegalArgumentException e) {
+			throw e;
+		}
+		m.setContent(dto.getContent());
+		m.setAuthor(dto.getAuthor());
+		m.setDest(dto.getDest());
+		return m;
 	}
 }

@@ -20,7 +20,7 @@ public interface MessageDao {
 			+ "content VARCHAR NOT NULL)")
 	void createTable();
 	
-	@SqlUpdate("INSERT INTO ingredients (id, author, dest, content) VALUES (:id, :author, :dest, :content)")
+	@SqlUpdate("INSERT INTO messages (id, author, dest, content) VALUES (:id, :author, :dest, :content)")
     void insert(@BindBean Message m);
 	
 	@SqlQuery("SELECT * FROM messages")
