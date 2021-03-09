@@ -1,44 +1,44 @@
-package java;
+package fr.ulille.iut.amimir;
 
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
-import java.security.PublicKey;
+import java.security.PrivateKey;
 import java.security.spec.InvalidKeySpecException;
-import java.security.spec.X509EncodedKeySpec;
+import java.security.spec.PKCS8EncodedKeySpec;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-public class Encryption {
-	private PublicKey publicKey;
+public class Decryption {
+	private PrivateKey privateKey;
 	
-	public Encryption(String key) {
+	public Decryption(String key) {
 		byte[] keyBytes = key.getBytes();
-		X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
+		PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
 		
-		KeyFactory kfPub = null;
+		KeyFactory kfPriv = null;
 		try {
-			kfPub = KeyFactory.getInstance("RSA");
+			kfPriv = KeyFactory.getInstance("RSA");
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		PublicKey pubKey = null;
+		PrivateKey privKey = null;
 		try {
-			pubKey = kfPub.generatePublic(spec);
+			privKey = kfPriv.generatePrivate(spec);
 		} catch (InvalidKeySpecException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		this.publicKey = pubKey;
+		this.privateKey = privKey;
 	}
 	
-	public byte[] crypt(String message) {
+	public byte[] decrypt(String message) {
 		Cipher cipher = null;
 		try {
 			cipher = Cipher.getInstance("RSA");
@@ -47,7 +47,7 @@ public class Encryption {
 		}
 		
         try {
-			cipher.init(Cipher.ENCRYPT_MODE, this.publicKey);
+			cipher.init(Cipher.DECRYPT_MODE, this.privateKey);
 		} catch (InvalidKeyException e) {
 			e.printStackTrace();
 		}  

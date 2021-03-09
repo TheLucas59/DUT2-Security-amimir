@@ -1,4 +1,4 @@
-package java;
+package fr.ulille.iut.amimir;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
