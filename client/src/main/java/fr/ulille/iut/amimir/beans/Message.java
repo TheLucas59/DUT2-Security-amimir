@@ -61,4 +61,11 @@ public class Message {
 	public void setId(UUID id) {
 		this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return "Message [author=" + author + ", dest=" + dest + ", content=" + content + ", id=" + id + "]";
+	}
+
+	
 }
