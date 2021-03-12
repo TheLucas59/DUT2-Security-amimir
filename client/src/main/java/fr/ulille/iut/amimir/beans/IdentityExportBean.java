@@ -1,12 +1,14 @@
 package fr.ulille.iut.amimir.beans;
 
+import java.io.Serializable;
 import java.security.PublicKey;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-public class IdentityExportBean {
+public class IdentityExportBean implements Serializable{
+	private static final long serialVersionUID = -6459827056323204480L;
 	PublicKey pubkey;
 	UUID id;
 	

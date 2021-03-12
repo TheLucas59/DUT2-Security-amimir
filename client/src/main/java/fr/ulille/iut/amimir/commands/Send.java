@@ -68,13 +68,20 @@ public class Send {
 			URL url = new URL(server);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("POST");
-			con.setRequestProperty("Content-Type", "application/json; utf-8");
-			con.setRequestProperty("Accept", "application/json");
+			con.setRequestProperty("Content-Type", "application/json");
 			con.setDoOutput(true);
 			
 			OutputStream os = con.getOutputStream();
-			byte[] input = o.writeValueAsString(m).getBytes("utf-8");
+			System.out.println(o.writeValueAsString(m).toString());
+			byte[] input = o.writeValueAsString(m).getBytes();
 			os.write(input, 0, input.length);
+			os.flush();
+			
+			if(con.getResponseCode() == 201) {
+				System.out.println("Message envoyé avec succès!");
+			} else {
+				System.out.println("Erreur lors de l'envoi du message, le serveur a renvoyé : " + con.getResponseCode());
+			}
 		} catch (MalformedURLException e) {
 			System.out.println("Erreur : mauvaise URL de serveur");
 			System.exit(1);

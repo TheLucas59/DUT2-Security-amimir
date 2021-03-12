@@ -1,12 +1,14 @@
 package fr.ulille.iut.amimir.beans;
 
+import java.io.Serializable;
 import java.security.PublicKey;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-public class Contact {
+public class Contact implements Serializable{
+	private static final long serialVersionUID = 4029298268503474699L;
 	private PublicKey pubkey;
 	private UUID id;
 	private String alias;

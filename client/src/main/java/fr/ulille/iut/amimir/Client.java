@@ -6,10 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-
 import fr.ulille.iut.amimir.beans.Contact;
 import fr.ulille.iut.amimir.beans.User;
 import fr.ulille.iut.amimir.json.SerializeUtils;
@@ -31,9 +27,6 @@ public class Client {
 		try {
 			SerializeUtils.serializeUser(u);
 			SerializeUtils.serializeContacts(l);
-		} catch (JsonGenerationException | JsonMappingException e) {
-			System.out.println("Couldn't generate JSON!");
-			System.exit(1);
 		} catch (IOException e) {
 			System.out.println("Couldn't write to disk!");
 			System.exit(1);
@@ -48,19 +41,10 @@ public class Client {
 	 */
 	public void loadUserConfiguration(String configFolder) {
 		try {
-			System.out.println(new java.io.File(configFolder + "user.json").getCanonicalPath());
-			System.out.println("User : ");
-			this.u = SerializeUtils.deserializeUser(configFolder + "user.json");
-			System.out.println("Contacts : ");
-			this.l = SerializeUtils.deserializeContacts(configFolder + "contacts.json");
-		} catch (JsonParseException e) {
-			System.out.println("Couldn't parse JSON!");
-			System.exit(1);
-		} catch (JsonMappingException e) {
-			System.out.println("Couldn't map JSON to bean! (loadUserConfiguration)\n" + e);
-			System.exit(1);
-		} catch (IOException e) {
-			System.out.println("Couldn't read JSON!");
+			this.u = SerializeUtils.deserializeUser(configFolder + "user.ser");
+			this.l = SerializeUtils.deserializeContacts(configFolder + "contacts.ser");
+		} catch (IOException | ClassNotFoundException e) {
+			System.out.println("Couldn't read configuration!");
 			System.exit(1);
 		}
 	}
@@ -71,14 +55,8 @@ public class Client {
 		String name = s.nextLine();
 		try {
 			SerializeUtils.deserializeIdentityExport(file, name);
-		} catch (JsonParseException e) {
-			System.out.println("Couldn't parse JSON!");
-			System.exit(1);
-		} catch (JsonMappingException e) {
-			System.out.println("Couldn't map JSON to bean! (importContact)");
-			System.exit(1);
-		} catch (IOException e) {
-			System.out.println("Couldn't read JSON!");
+		} catch (IOException | ClassNotFoundException e) {
+			System.out.println("Couldn't read configuration!");
 			System.exit(1);
 		}
 		System.out.println("Contact " + name + " ajouté avec succès.");
@@ -88,9 +66,6 @@ public class Client {
 	public void exportIdentity() {
 		try {
 			SerializeUtils.serializeIdentityFile(u);
-		} catch (JsonGenerationException | JsonMappingException e) {
-			System.out.println("Couldn't generate JSON!");
-			System.exit(1);
 		} catch (IOException e) {
 			System.out.println("Couldn't write to disk!");
 			System.exit(1);
