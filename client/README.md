@@ -28,3 +28,15 @@
 	- si aucune configuration n'est trouvée (dans le dossier de l'application)
 	- si la configuration passée en paramètre n'existe pas
 		- si la configuration passée est invalide, erreur et ne rien faire pour ne pas damage une installation possible existante.
+		
+## Build / Run
+
+Run :
+```bash
+mvn clean compile exec:java -Dexec.args="<arguments>"
+```
+
+Build :
+```bash
+mvn clean compile assembly:single
+```
