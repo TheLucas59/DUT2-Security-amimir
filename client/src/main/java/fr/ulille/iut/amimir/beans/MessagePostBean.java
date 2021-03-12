@@ -5,28 +5,19 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-public class Message {
+public class MessagePostBean {
 	private UUID author;
 	private UUID dest;
 	private String content;
-	private UUID id;
-
-	public Message() {
+	
+	public MessagePostBean() {
 		
 	}
-
-	public Message(UUID author, UUID dest, String content, UUID id) {
-		this.author = author;
-		this.dest = dest;
-		this.content = content;
-		this.id = id;
-	}
 	
-	public Message(UUID author, UUID dest, String content) {
+	public MessagePostBean(UUID author, UUID dest, String content) {
 		this.author = author;
 		this.dest = dest;
 		this.content = content;
-		this.id = UUID.randomUUID();
 	}
 
 	@JsonGetter
@@ -58,21 +49,4 @@ public class Message {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-	@JsonGetter
-	public UUID getId() {
-		return id;
-	}
-
-	@JsonSetter
-	public void setId(UUID id) {
-		this.id = id;
-	}
-
-	@Override
-	public String toString() {
-		return "Message [author=" + author + ", dest=" + dest + ", content=" + content + ", id=" + id + "]";
-	}
-
-	
 }

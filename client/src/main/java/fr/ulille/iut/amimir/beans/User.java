@@ -1,45 +1,35 @@
 package fr.ulille.iut.amimir.beans;
 
-import java.security.PrivateKey;
-import java.security.PublicKey;
+import java.security.KeyPair;
+import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
+import fr.ulille.iut.amimir.KeyGenerator;
+
 public class User {
-	private PrivateKey privkey;
-	private PublicKey pubkey;
+	private KeyPair k;
 	private UUID id;
 	
 	public User() {
 		
 	}
 	
-	public User(PrivateKey privkey, PublicKey pubkey, UUID id) {
-		this.privkey = privkey;
-		this.pubkey = pubkey;
+	public User(UUID id) {
+		try {
+			this.k = KeyGenerator.buildKeyPair();
+		} catch (NoSuchAlgorithmException e) {
+			System.out.println("Couldn't create key pair");
+			System.exit(1);
+		}
 		this.id = id;
 	}
 	
-	@JsonGetter
-	public PrivateKey getPrivkey() {
-		return privkey;
-	}
-	
-	@JsonSetter
-	public void setPrivkey(PrivateKey privkey) {
-		this.privkey = privkey;
-	}
-	
-	@JsonGetter
-	public PublicKey getPubkey() {
-		return pubkey;
-	}
-	
-	@JsonSetter
-	public void setPubkey(PublicKey pubkey) {
-		this.pubkey = pubkey;
+	public User(KeyPair k, UUID id) {
+		this.k = k;
+		this.id = id;
 	}
 	
 	@JsonGetter
@@ -50,5 +40,13 @@ public class User {
 	@JsonSetter
 	public void setId(UUID id) {
 		this.id = id;
+	}
+
+	public KeyPair getK() {
+		return k;
+	}
+
+	public void setK(KeyPair k) {
+		this.k = k;
 	}
 }

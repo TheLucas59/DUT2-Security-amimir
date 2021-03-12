@@ -40,6 +40,6 @@ public class IdentityExportBean {
 	}
 	
 	public static IdentityExportBean fromUser(User u) {
-		return new IdentityExportBean(u.getPubkey(), u.getId());
+		return new IdentityExportBean(u.getK().getPublic(), u.getId());
 	}
 }

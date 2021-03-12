@@ -1,11 +1,8 @@
 package fr.ulille.iut.amimir;
 
 import java.security.InvalidKeyException;
-import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
-import java.security.PublicKey;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.X509EncodedKeySpec;
+import java.security.PrivateKey;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -13,31 +10,12 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 public class Encryption {
-	private PublicKey publicKey;
+	private PrivateKey privKey;
 	
-	public Encryption(String key) {
-		byte[] keyBytes = key.getBytes();
-		X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
-		
-		KeyFactory kfPub = null;
-		try {
-			kfPub = KeyFactory.getInstance("RSA");
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		PublicKey pubKey = null;
-		try {
-			pubKey = kfPub.generatePublic(spec);
-		} catch (InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		this.publicKey = pubKey;
+	public Encryption(PrivateKey privKey) {
+		this.privKey = privKey;
 	}
-	
+
 	public byte[] crypt(String message) {
 		Cipher cipher = null;
 		try {
@@ -47,7 +25,7 @@ public class Encryption {
 		}
 		
         try {
-			cipher.init(Cipher.ENCRYPT_MODE, this.publicKey);
+			cipher.init(Cipher.ENCRYPT_MODE, this.privKey);
 		} catch (InvalidKeyException e) {
 			e.printStackTrace();
 		}  
