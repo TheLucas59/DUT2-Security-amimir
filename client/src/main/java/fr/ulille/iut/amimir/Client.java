@@ -124,4 +124,21 @@ public class Client {
 		}
 		return null;
 	}
+
+	public void removeContact(String removeContact) {
+		for(Contact c : l) {
+			if(c.getAlias().equals(removeContact)) {
+				l.remove(c);
+				System.out.println("Contact " + c.getAlias() + " supprimé avec succès.");
+				try {
+					SerializeUtils.serializeContacts(l);
+				} catch (IOException e) {
+					System.out.println("Erreur : impossible de mettre a jour la liste de contacts");
+				}
+				return;
+			}
+		}
+		System.out.println("Erreur : Contact introuvable.");
+		System.exit(1);
+	}
 }

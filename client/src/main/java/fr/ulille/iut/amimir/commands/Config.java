@@ -9,7 +9,9 @@ public class Config {
 		String importConfig = null;
 		String configFolder = "./config/";
 		boolean export = false;
-		boolean listContacts = false;;
+		boolean listContacts = false;
+		String removeContact = null;
+		
 		try{
 			for(int i = 0; i < args.length; i++) {
 				switch(args[i]) {
@@ -32,6 +34,8 @@ public class Config {
 				case "--list-contacts":
 					listContacts = true;
 					break;
+				case "--remove":
+					removeContact = args[i+1];
 				}
 			}
 		}
@@ -42,6 +46,11 @@ public class Config {
 		
 		Client client = new Client();
 		client.loadUserConfiguration(configFolder);
+		
+		if(removeContact != null) {
+			client.removeContact(removeContact);
+			System.exit(0);
+		}
 		
 		if(listContacts) {
 			System.out.println("Liste des contacts : ");
