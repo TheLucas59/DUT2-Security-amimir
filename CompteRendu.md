@@ -34,6 +34,8 @@ On ne peut par contre pas :
 
 ## Mode d'emploi
 
+**Pré requis : Java 11, Maven**
+
 ### Serveur REST
 
 Pour compiler le serveur il suffit de se mettre dans le dossier `rest` et d'exécuter :
