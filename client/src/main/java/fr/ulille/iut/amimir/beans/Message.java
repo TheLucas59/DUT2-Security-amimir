@@ -5,7 +5,7 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-public class Message {
+public class Message{
 	private UUID author;
 	private UUID dest;
 	private String content;
@@ -86,6 +86,4 @@ public class Message {
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
 	}
-
-	
 }

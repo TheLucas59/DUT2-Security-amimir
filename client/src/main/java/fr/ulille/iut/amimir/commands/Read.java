@@ -3,7 +3,10 @@ package fr.ulille.iut.amimir.commands;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fr.ulille.iut.amimir.Client;
 import fr.ulille.iut.amimir.Main;
+import fr.ulille.iut.amimir.beans.Contact;
 import fr.ulille.iut.amimir.beans.Message;
 import fr.ulille.iut.amimir.json.SerializeUtils;
 
@@ -60,7 +64,15 @@ public class Read {
 		
 		try {
 			List<Message> l = SerializeUtils.deserializeMessage(new URL(server + "/" + resolvedAuthorId.toString() + "/" + destId.toString()).openStream());
+			l.sort(new Comparator<Message>() {
+				@Override
+				public int compare(Message o1, Message o2) {
+					return Long.compare(o1.getTimestamp(), o2.getTimestamp());
+				}
+			});
+			Contact c = client.findContactByUUID(resolvedAuthorId);
 			for(Message m : l) {
+				System.out.println("Message de " + c.getAlias() + ", le " + LocalDateTime.ofInstant(Instant.ofEpochMilli(m.getTimestamp()), ZoneId.systemDefault()).toString());
 				System.out.println(new String(client.decrypt(m.getContent())));
 			}
 		} catch (MalformedURLException e) {

@@ -32,7 +32,6 @@ public class Decryption {
 		}  
 
         try {
-        	System.out.println("trying to decrypt :\n" + message);
 			return cipher.doFinal(Base64.getDecoder().decode(message));
 		} catch (IllegalBlockSizeException | BadPaddingException e) {
 			e.printStackTrace();
