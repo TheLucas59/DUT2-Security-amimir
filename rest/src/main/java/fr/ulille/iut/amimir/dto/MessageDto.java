@@ -7,6 +7,7 @@ public class MessageDto {
 	private UUID author;
 	private UUID dest;
 	private String content;
+	private long timestamp;
 	
     public MessageDto() {
         
@@ -42,6 +43,14 @@ public class MessageDto {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
     
     

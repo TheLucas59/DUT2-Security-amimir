@@ -10,6 +10,7 @@ public class Message {
 	private UUID author;
 	private UUID dest;
 	private String content;
+	private long timestamp;
 	
 	public Message() {
 		
@@ -47,12 +48,21 @@ public class Message {
 		this.content = content;
 	}
 	
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
+	
 	public static MessageDto toDto(Message m) {
 		MessageDto dto = new MessageDto();
 		dto.setId(m.getId());
 		dto.setAuthor(m.getAuthor());
 		dto.setDest(m.getDest());
 		dto.setContent(m.getContent());
+		dto.setTimestamp(m.getTimestamp());
 		return dto;
 	}
 	
@@ -62,6 +72,7 @@ public class Message {
 		m.setAuthor(dto.getAuthor());
 		m.setDest(dto.getDest());
 		m.setContent(dto.getContent());
+		m.setTimestamp(dto.getTimestamp());
 		return m;
 	}
 	
@@ -81,6 +92,8 @@ public class Message {
 		m.setContent(dto.getContent());
 		m.setAuthor(dto.getAuthor());
 		m.setDest(dto.getDest());
+		m.setTimestamp(System.currentTimeMillis());
 		return m;
 	}
+
 }

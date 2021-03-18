@@ -17,10 +17,11 @@ public interface MessageDao {
 			+ "id VARCHAR(128) PRIMARY KEY, "
 			+ "author VARCHAR(128), "
 			+ "dest VARCHAR(128), "
-			+ "content VARCHAR NOT NULL)")
+			+ "content VARCHAR NOT NULL, "
+			+ "timestamp INTEGER)")
 	void createTable();
 	
-	@SqlUpdate("INSERT INTO messages (id, author, dest, content) VALUES (:id, :author, :dest, :content)")
+	@SqlUpdate("INSERT INTO messages (id, author, dest, content, timestamp) VALUES (:id, :author, :dest, :content, :timestamp)")
     void insert(@BindBean Message m);
 	
 	@SqlQuery("SELECT * FROM messages")

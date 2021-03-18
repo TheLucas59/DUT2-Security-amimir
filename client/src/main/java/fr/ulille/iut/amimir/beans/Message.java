@@ -10,23 +10,26 @@ public class Message {
 	private UUID dest;
 	private String content;
 	private UUID id;
+	private long timestamp;
 
 	public Message() {
 		
 	}
 
-	public Message(UUID author, UUID dest, String content, UUID id) {
+	public Message(UUID author, UUID dest, String content, UUID id, long timestamp) {
 		this.author = author;
 		this.dest = dest;
 		this.content = content;
 		this.id = id;
+		this.timestamp = timestamp;
 	}
 	
-	public Message(UUID author, UUID dest, String content) {
+	public Message(UUID author, UUID dest, String content, long timestamp) {
 		this.author = author;
 		this.dest = dest;
 		this.content = content;
 		this.id = UUID.randomUUID();
+		this.timestamp = timestamp;
 	}
 
 	@JsonGetter
@@ -72,6 +75,16 @@ public class Message {
 	@Override
 	public String toString() {
 		return "Message [author=" + author + ", dest=" + dest + ", content=" + content + ", id=" + id + "]";
+	}
+
+	@JsonGetter
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	@JsonSetter
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 
 	
