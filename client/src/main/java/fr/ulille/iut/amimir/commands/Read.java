@@ -3,6 +3,7 @@ package fr.ulille.iut.amimir.commands;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
 
@@ -60,7 +61,7 @@ public class Read {
 		try {
 			List<Message> l = SerializeUtils.deserializeMessage(new URL(server + "/" + resolvedAuthorId.toString() + "/" + destId.toString()).openStream());
 			for(Message m : l) {
-				System.out.println(client.decrypt(m.getContent()));
+				System.out.println(new String(client.decrypt(m.getContent())));
 			}
 		} catch (MalformedURLException e) {
 			System.out.println("Erreur : mauvaise URL de serveur");

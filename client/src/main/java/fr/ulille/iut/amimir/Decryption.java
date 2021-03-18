@@ -1,9 +1,9 @@
 package fr.ulille.iut.amimir;
 
-import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
+import java.util.Base64;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -20,7 +20,7 @@ public class Decryption {
 	public byte[] decrypt(String message) {
 		Cipher cipher = null;
 		try {
-			cipher = Cipher.getInstance("RSA");
+			cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
 			e.printStackTrace();
 		}
@@ -32,8 +32,8 @@ public class Decryption {
 		}  
 
         try {
-        	System.out.println("trying to decrypt :\n" + message.getBytes());
-			return cipher.doFinal(message.getBytes(StandardCharsets.UTF_8));
+        	System.out.println("trying to decrypt :\n" + message);
+			return cipher.doFinal(Base64.getDecoder().decode(message));
 		} catch (IllegalBlockSizeException | BadPaddingException e) {
 			e.printStackTrace();
 		}

@@ -1,9 +1,9 @@
 package fr.ulille.iut.amimir;
 
-import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
+import java.util.Base64;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -20,7 +20,7 @@ public class Encryption {
 	public String crypt(String message) {
 		Cipher cipher = null;
 		try {
-			cipher = Cipher.getInstance("RSA");
+			cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
 			e.printStackTrace();
 		}
@@ -32,7 +32,7 @@ public class Encryption {
 		}  
 
         try {
-			return new String(cipher.doFinal(message.getBytes()), StandardCharsets.UTF_8);
+			return Base64.getEncoder().encodeToString(cipher.doFinal(message.getBytes()));
 		} catch (IllegalBlockSizeException | BadPaddingException e) {
 			e.printStackTrace();
 		}
