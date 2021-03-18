@@ -6,6 +6,8 @@ Amimir - Un chat sécurisé où le serveur n'a à aucun moment le message en cla
 
 Nous avons utilisé la librairie Jackson pour le client, pour pouvoir lire le json renvoyé par le serveur REST. Le serveur REST utilise lui Jersey, JDBI et Jakarta parce que nous avons réutilisé en partie le squelette du serveur REST fait en cours de programmation répartie.
 
+On apprécie gérer des problématiques de sécurité en informatique, mais également gérer un serveur REST. Ce projet nous a permis de travailler sur les deux en même temps et nous avons apprécié réaliser ce projet.
+
 Loïc DEMAY ([loic.demay.etu@univ-lille.fr](mailto:loic.demay.etu@univ-lille.fr))
 
 Lucas PLÉ ([lucas.ple.etu@univ-lille.fr](mailto:lucas.ple.etu@univ-lille.fr))
