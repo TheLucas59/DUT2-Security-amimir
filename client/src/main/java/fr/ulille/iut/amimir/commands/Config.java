@@ -71,6 +71,7 @@ public class Config {
 		}
 		
 		System.out.println("Vous n'avez pas fait de commande!");
+		System.exit(1);
 	}
 
 }

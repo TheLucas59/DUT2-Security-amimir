@@ -50,6 +50,7 @@ public class Client {
 	public void loadUserConfiguration(String configFolder) {
 		if(!new File(configFolder + "user.ser").exists()) {
 			System.out.println("Erreur : Le dossier de configuration que vous avez spécifié n'existe pas ou ne contient pas de configuration valide (pour générer une configuration, utilisez `config --generate`)");
+			System.exit(1);
 		}
 		try {
 			this.u = SerializeUtils.deserializeUser(configFolder + "user.ser");
@@ -76,6 +77,7 @@ public class Client {
 			SerializeUtils.serializeContacts(l);
 		} catch (IOException e) {
 			System.out.println("Erreur : impossible de mettre a jour la liste de contacts");
+			System.exit(1);
 		}
 	}
 
@@ -134,6 +136,7 @@ public class Client {
 					SerializeUtils.serializeContacts(l);
 				} catch (IOException e) {
 					System.out.println("Erreur : impossible de mettre a jour la liste de contacts");
+					System.exit(1);
 				}
 				return;
 			}
