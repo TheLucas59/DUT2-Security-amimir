@@ -13,7 +13,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		if(args.length < 1) {
-			System.out.println("Usage : //TODO");
+			printTodo();
 			System.exit(1);
 		}
 		
@@ -27,6 +27,26 @@ public class Main {
 			case "config":
 				Config.handle(args);
 				break;
+			default:
+				printTodo();
 		}
+	}
+
+	private static void printTodo() {
+		System.out.println("Amimir - Client\n"
+				+ "Utilisation : \n"
+				+ "read : Lire des messages\n"
+				+ "		-a <auteur> (UUID / Contact) : Auteur du message\n"
+				+ "send : envoyer un message\n"
+				+ "		-d <contact> : Destinataire du message\n"
+				+ "		-m <message> : Message a envoyer\n"
+				+ "config : gerer la configuration\n"
+				+ "		--generate : Crée une nouvelle configuration dans le dossier 'config' ou est situé le jar du client.\n"
+				+ "		--import <chemin> : Ajoute au contact le contact contenu dans un fichier.\n"
+				+ "		--export-identity : Exporte la configuration actuelle ou est situé le jar du client.\n"
+				+ "\n"
+				+ "Arguments globaux : \n"
+				+ "		-s, --server <server url> : Spécifier un serveur différent du serveur par défaut (localhost)\n"
+				+ "		--config <config folder> : Spécifier un dossier de configuration différent de celui par défaut (./config)\n");
 	}
 }

@@ -60,9 +60,9 @@ public class Send {
 		}
 		UUID authorId = client.getClientId();
 		
-		byte[] encryptedMessage = client.encrypt(message);
+		String encryptedMessage = client.encrypt(message, client.findContactByUUID(destId));
 		
-		MessagePostBean m = new MessagePostBean(authorId, destId, encryptedMessage.toString());
+		MessagePostBean m = new MessagePostBean(authorId, destId, encryptedMessage);
 		
 		try {
 			URL url = new URL(server);

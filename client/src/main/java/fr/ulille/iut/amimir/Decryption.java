@@ -1,8 +1,9 @@
 package fr.ulille.iut.amimir;
 
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.PublicKey;
+import java.security.PrivateKey;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -10,10 +11,10 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 public class Decryption {
-	private PublicKey pubKey;
+	private PrivateKey privKey;
 	
-	public Decryption(PublicKey pubKey) {
-		this.pubKey = pubKey;
+	public Decryption(PrivateKey privKey) {
+		this.privKey = privKey;
 	}
 	
 	public byte[] decrypt(String message) {
@@ -25,13 +26,14 @@ public class Decryption {
 		}
 		
         try {
-			cipher.init(Cipher.DECRYPT_MODE, this.pubKey);
+			cipher.init(Cipher.DECRYPT_MODE, this.privKey);
 		} catch (InvalidKeyException e) {
 			e.printStackTrace();
 		}  
 
         try {
-			return cipher.doFinal(message.getBytes());
+        	System.out.println("trying to decrypt :\n" + message.getBytes());
+			return cipher.doFinal(message.getBytes(StandardCharsets.UTF_8));
 		} catch (IllegalBlockSizeException | BadPaddingException e) {
 			e.printStackTrace();
 		}

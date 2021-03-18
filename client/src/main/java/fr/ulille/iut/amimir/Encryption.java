@@ -1,8 +1,9 @@
 package fr.ulille.iut.amimir;
 
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
+import java.security.PublicKey;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -10,13 +11,13 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 public class Encryption {
-	private PrivateKey privKey;
+	private PublicKey pubKey;
 	
-	public Encryption(PrivateKey privKey) {
-		this.privKey = privKey;
+	public Encryption(PublicKey publicKey) {
+		this.pubKey = publicKey;
 	}
 
-	public byte[] crypt(String message) {
+	public String crypt(String message) {
 		Cipher cipher = null;
 		try {
 			cipher = Cipher.getInstance("RSA");
@@ -25,13 +26,13 @@ public class Encryption {
 		}
 		
         try {
-			cipher.init(Cipher.ENCRYPT_MODE, this.privKey);
+			cipher.init(Cipher.ENCRYPT_MODE, this.pubKey);
 		} catch (InvalidKeyException e) {
 			e.printStackTrace();
 		}  
 
         try {
-			return cipher.doFinal(message.getBytes());
+			return new String(cipher.doFinal(message.getBytes()), StandardCharsets.UTF_8);
 		} catch (IllegalBlockSizeException | BadPaddingException e) {
 			e.printStackTrace();
 		}
