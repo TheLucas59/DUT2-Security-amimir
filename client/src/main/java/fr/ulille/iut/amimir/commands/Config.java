@@ -18,8 +18,8 @@ public class Config {
 				case "--generate":
 					Client client = new Client();
 					client.generateUserConfiguration();
-					System.out.println("Configuration generated.");
-					System.out.println("Your UUID is : " + client.u.getId());
+					System.out.println("Configuration générée.");
+					System.out.println("Votre UUID est : " + client.u.getId());
 					System.exit(0);
 				case "-i":
 				case "--import":

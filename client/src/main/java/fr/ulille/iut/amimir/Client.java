@@ -28,7 +28,7 @@ public class Client {
 		try {
 			Files.createDirectory(Path.of("./config"));
 		} catch (IOException e1) {
-			System.out.println("Couldn't create the config directory!");
+			System.out.println("Erreur : Impossible de créer le dossier de configuration");
 		}
 		User u = new User(UUID.randomUUID());
 		List<Contact> l = new ArrayList<Contact>();
@@ -36,7 +36,7 @@ public class Client {
 			SerializeUtils.serializeUser(u);
 			SerializeUtils.serializeContacts(l);
 		} catch (IOException e) {
-			System.out.println("Couldn't write to disk!");
+			System.out.println("Erreur : impossible d'écrire la configuration");
 			System.exit(1);
 		}
 		this.u = u;
@@ -49,13 +49,13 @@ public class Client {
 	 */
 	public void loadUserConfiguration(String configFolder) {
 		if(!new File(configFolder + "user.ser").exists()) {
-			System.out.println("Error : You either supplied an invalid configuration folder, or you do not have any configuration (you can generate one with `config --generate`");
+			System.out.println("Erreur : Le dossier de configuration que vous avez spécifié n'existe pas ou ne contient pas de configuration valide (pour générer une configuration, utilisez `config --generate`)");
 		}
 		try {
 			this.u = SerializeUtils.deserializeUser(configFolder + "user.ser");
 			this.l = SerializeUtils.deserializeContacts(configFolder + "contacts.ser");
 		} catch (IOException | ClassNotFoundException e) {
-			System.out.println("Couldn't read configuration!");
+			System.out.println("Erreur : impossible de lire la configuration.");
 			System.exit(1);
 		}
 	}
@@ -67,7 +67,7 @@ public class Client {
 		try {
 			this.l.add(SerializeUtils.deserializeIdentityExport(file, name));
 		} catch (IOException | ClassNotFoundException e) {
-			System.out.println("Couldn't read configuration!");
+			System.out.println("Erreur : fichier d'identité invalide");
 			System.exit(1);
 		}
 		System.out.println("Contact " + name + " ajouté avec succès.");
@@ -75,7 +75,7 @@ public class Client {
 		try {
 			SerializeUtils.serializeContacts(l);
 		} catch (IOException e) {
-			System.out.println("Couldn't write the contact!");
+			System.out.println("Erreur : impossible de mettre a jour la liste de contacts");
 		}
 	}
 
@@ -83,7 +83,7 @@ public class Client {
 		try {
 			SerializeUtils.serializeIdentityFile(u);
 		} catch (IOException e) {
-			System.out.println("Couldn't write to disk!");
+			System.out.println("Erreur : impossible d'écrire le fichier d'identité sur le disque.");
 			System.exit(1);
 		}
 		System.out.println("Fichier d'identité exporté avec succès.");
