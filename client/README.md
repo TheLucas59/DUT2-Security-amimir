@@ -10,24 +10,22 @@
 
 ### Arguments
 
-- Connexion au serveur
-	- `-s`, `--server` Préciser l'url du serveur auquel on récupère les messages (sinon utiliser une url de base? fichier de config?)
+read : Lire des messages
+- `-a <auteur>` (UUID / Contact) : Auteur du message
 
-- Gérer la configuration du client
-	- `--export-identity` Exporter le fichier d'identité (pubkey, uuid)
-	- `--config <folder>` Utiliser le dossier passé en paramètre a la place de la configuration de base (celle dans le dossier courant)
-	- `-i <file>`, `--import <file>` Importer un fichier d'identité
+send : envoyer un message
+- `-d <contact>` : Destinataire du message
+- `-m <message>` : Message a envoyer
 
-- Afficher les messages selon les paramètres :
-	- `-a <author>` "author" : uuid ou alias (si pas un uuid valide, alors check dans les alias, sinon erreur)
-	- `-d <dest>` si précisé, sinon dest = client actuel
+config : gerer la configuration
+- `--generate` : Crée une nouvelle configuration dans le dossier 'config' ou est situé le jar du client.
+- `--import <chemin>` : Ajoute aux contacts le contact contenu dans un fichier.
+- `--export-identity` : Exporte la configuration actuelle ou est situé le jar du client.
+- `--list-contacts` : Liste les contacts actuels
 
-## Comportement
-
-- Generer les clés (first run)
-	- si aucune configuration n'est trouvée (dans le dossier de l'application)
-	- si la configuration passée en paramètre n'existe pas
-		- si la configuration passée est invalide, erreur et ne rien faire pour ne pas damage une installation possible existante.
+Arguments globaux :
+- `-s, --server <server url>` : Spécifier un serveur différent du serveur par défaut (localhost)
+- `--config <config folder>` : Spécifier un dossier de configuration différent de celui par défaut (./config)
 		
 ## Build / Run
 
