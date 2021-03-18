@@ -4,13 +4,13 @@
 
 Amimir - Un chat sécurisé où le serveur n'a à aucun moment le message en clair ou la possibilité de le décrypter, et seuls les utilisateurs peuvent décrypter les messages qui leurs sont adressés. 
 
-Nous avons utilisé la librairie Jackson pour le client, pour pouvoir lire le json renvoyé par le serveur REST. Le serveur REST utilise lui Jersey, JDBI et Jakarta parce que nous avons réutilisé en partie le squelette du serveur REST fait en cours de programmation répartie.
-
-On apprécie gérer des problématiques de sécurité en informatique, mais également gérer un serveur REST. Ce projet nous a permis de travailler sur les deux en même temps et nous avons apprécié réaliser ce projet.
-
 Loïc DEMAY ([loic.demay.etu@univ-lille.fr](mailto:loic.demay.etu@univ-lille.fr))
 
 Lucas PLÉ ([lucas.ple.etu@univ-lille.fr](mailto:lucas.ple.etu@univ-lille.fr))
+
+Nous avons utilisé la librairie Jackson pour le client, pour pouvoir lire le json renvoyé par le serveur REST. Le serveur REST utilise lui Jersey, JDBI et Jakarta parce que nous avons réutilisé en partie le squelette du serveur REST fait en cours de programmation répartie.
+
+Nous avons apprécié gérer des problématiques de sécurité en informatique, mais également gérer un serveur REST. Ce projet nous a permis de travailler sur les deux en même temps et nous avons apprécié réaliser ce projet.
 
 ### Difficultés rencontrées
 
@@ -28,6 +28,10 @@ Sur le projet actuel, on peut :
 - Envoyer un message
 - Lire les messages qu'un contact nous a envoyé
 
+On ne peut par contre pas :
+- Utiliser le projet de façon graphique
+- Faire plusieurs commandes a la fois (ce qui rends l'utilisation plutôt lente et non user friendly)
+
 ## Mode d'emploi
 
 ### Serveur REST
@@ -41,9 +45,8 @@ Le projet sera compilé puis empaqueté dans un fichier `jar` dans le dossier `t
 
 Pour lancer le serveur il suffit juste de lancer le jar :
 ```bash
-java -jar amimir_rest-VERSION.jar
+java -jar amimir_rest-1.0-SNAPSHOT.jar
 ```
-ou `VERSION` est la version compilée (ici elle devrait être `1.0-SNAPSHOT`).
 
 ### Client
 
@@ -59,12 +62,6 @@ Pour utiliser le client, il suffit de lancer le jar avec ses arguments :
 ```bash
 java -jar amimir_client-1.0-SNAPSHOT-jar-with-dependencies.jar <arguments>
 ```
-
-Il est possible d'utiliser le client sans compiler le jar, en exécutant directement avec maven :
-```bash
-mvn clean compile exec:java -Dexec.args="<arguments>"
-```
-Nous n'avons néanmoins pas testé comment les fichiers de configuration se comportent avec cette méthode.
 
 L'utilisation se découpe en trois commandes majeures :
 
@@ -82,5 +79,5 @@ config : gerer la configuration
 - `--list-contacts` : Liste les contacts actuels
 
 Arguments globaux :
-- `-s, --server <server url>` : Spécifier un serveur différent du serveur par défaut (localhost)
-- `--config <config folder>` : Spécifier un dossier de configuration différent de celui par défaut (./config)
+- `-s, --server <server url>` : Spécifier un serveur REST différent du serveur par défaut (`localhost:8080/api/v1/messages`)
+- `--config <config folder>` : Spécifier un dossier de configuration différent de celui par défaut (`./config`)
